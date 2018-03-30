@@ -159,6 +159,7 @@ return [
         // Shoppy\Providers\BroadcastServiceProvider::class,
         Shoppy\Providers\EventServiceProvider::class,
         Shoppy\Providers\RouteServiceProvider::class,
+        Shoppy\Mongo\ServiceProvider::class,
 
     ],
 
@@ -208,6 +209,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Mongo' => Shoppy\Mongo\Facade::class,
 
     ],
 
