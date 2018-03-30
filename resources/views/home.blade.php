@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    <div id="app"></div>
+                    You are logged in!
                 </div>
             </div>
         </div>
