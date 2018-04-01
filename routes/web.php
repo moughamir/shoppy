@@ -7,14 +7,17 @@
  */
 Route::get('shops', function (Request $request) {
     $collection = Mongo::get()->shops->shops;
-    $page = isset($_GET['p']) ? (int) $_GET['p'] : 1;
-    $limit = isset($_GET['l']) ? (int) $_GET['l'] : 8;
-    $skip = ($page - 1) * $limit;
-    $filter = [];
-    $options = [
-        'skip' => $skip,
+    $page       = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+    $limit      = isset($_GET['l']) ? (int) $_GET['l'] : 8;
+    $skip       = ($page - 1) * $limit;
+    $sort       = [];
+    $filter     = [];
+    $options    = [
+        'skip'  => $skip,
         'limit' => $limit,
+        'sort'  => $sort,
     ];
+
     $cursor = $collection->find($filter, $options)->toArray();
     return $cursor;
 });

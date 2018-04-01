@@ -36272,7 +36272,9 @@ var Shops = function (_Component) {
 
         _this.state = {
             shops: [],
-            favorite: []
+            favorite: [],
+            currentPage: 1,
+            limits: 8
         };
         return _this;
     }
@@ -36281,7 +36283,12 @@ var Shops = function (_Component) {
         key: 'getShops',
         value: function getShops() {
             var that = this;
-            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('/').then(function (response) {
+            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('/', {
+                params: {
+                    page: this.state.currentPage,
+                    l: this.state.limits
+                }
+            }).then(function (response) {
                 that.setState({
                     shops: response.data
                 });

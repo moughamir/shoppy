@@ -13,12 +13,19 @@ export default class Shops extends Component {
         this.state = {
             shops: [],
             favorite: [],
+            currentPage: 1,
+            limits: 8,
         }
     }
 
     getShops() {
         let that = this;
-        axios.get('/')
+        axios.get('/', {
+            params: {
+                page: this.state.currentPage,
+                l: this.state.limits,
+            }
+        })
             .then(function (response) {
                 that.setState({
                     shops: response.data
