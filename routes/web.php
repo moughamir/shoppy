@@ -1,10 +1,22 @@
 <?php
 
-// Mongo collections route
-Route::get('shops', function (Request $request, $limit=8, $page=1) {
+/**
+ * Mongo Collections route with pagination
+ * i.e: /shops?l=8&p=2
+ * @see https://gist.github.com/umutakturk/3804918
+ */
+Route::get('shops', function (Request $request) {
     $collection = Mongo::get()->shops->shops;
-    
-    return $collection->find()->limit($limit)->toArray();
+    $page = isset($_GET['p']) ? (int) $_GET['p'] : 1;
+    $limit = isset($_GET['l']) ? (int) $_GET['l'] : 8;
+    $skip = ($page - 1) * $limit;
+    $filter = [];
+    $options = [
+        'skip' => $skip,
+        'limit' => $limit,
+    ];
+    $cursor = $collection->find($filter, $options)->toArray();
+    return $cursor;
 });
 // Default routes
 Route::get('/', function () {
